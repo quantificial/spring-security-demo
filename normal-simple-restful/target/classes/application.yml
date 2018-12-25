@@ -1,7 +1,0 @@
-server:
-  session:
-    timeout: 5m
-  servlet:
-    session:
-      timeout: 5m
-  port: 8080
