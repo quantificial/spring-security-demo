@@ -24,6 +24,9 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
 	private String username;
 	private String password;
 	
+	/**
+	 * re-implement the obtainPassword and the super class could be able to use and get the password which is from JSON
+	 */
     @Override
     protected String obtainPassword(HttpServletRequest request) {
         String password = null; 
@@ -70,6 +73,8 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
 //                    sb.append(line);
 //                }
                 
+            	// convert the POST JSON Data to correct JSON object
+            	
                 String loginUserJson = IOUtils.toString(request.getReader());
 
                 //json transformation
