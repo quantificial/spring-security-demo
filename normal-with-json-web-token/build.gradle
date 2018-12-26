@@ -1,0 +1,52 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+bootJar {
+    baseName = 'normal-with-json-web-token'
+    version =  '0.1.0'
+}
+
+repositories {	
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	
+    compile 'io.jsonwebtoken:jjwt-api:0.10.5'
+    runtime 'io.jsonwebtoken:jjwt-impl:0.10.5',
+            // Uncomment the next line if you want to use RSASSA-PSS (PS256, PS384, PS512) algorithms:
+            //'org.bouncycastle:bcprov-jdk15on:1.60',
+            'io.jsonwebtoken:jjwt-jackson:0.10.5'
+            
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-devtools'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.security:spring-security-jwt' // spring jwt library
+	implementation 'org.hsqldb:hsqldb'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+		
+	compileOnly 'org.projectlombok:lombok:1.18.4'
+	
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
