@@ -36,8 +36,13 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			
 			// $2a$04$tAb.OGi36U/yLEmfO1BQQuiybeY3ryEk1bSmd8TpO1kWwVOM1Tm6q = 123456 after encode
 			// $2a$12$UDK4wH58oja2kL8koUypF.AqfEBVge4..eGyC70aqEhwVWhnrMMj6 = abcd@1234 after encode
-			return new UserModel(name, "abcd@1234", "ADMIN");
+			return new UserModel(name, "abcd@1234", "ROLE_ADMIN");
 		}
+		
+		if(name.equalsIgnoreCase("user")) {
+			return new UserModel(name, "abcd@1234", "ROLE_USER");
+		}
+		
 		return null;		
 	}
 
@@ -88,6 +93,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	    	List<GrantedAuthority> grantedAuths = new ArrayList<>();
 	    	Arrays.stream(userModel.getRoles()).forEach(x -> grantedAuths.add(new SimpleGrantedAuthority(x)));
 	    	
+	    	grantedAuths.stream().forEach(x -> log.info("authority:" + x.getAuthority()));
 	    	
             //return new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
 	    	
